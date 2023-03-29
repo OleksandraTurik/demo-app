@@ -18,12 +18,14 @@ export const signUpSchema = yup.object().shape({
     .min(3, 'User Name must be at least 3 characters long'),
   password: yup
     .string()
-    .required('Password is required')
-    .min(8, 'Password must be at least 8 characters long'),
-  displayName: yup.string().min(3, 'Full Name must be at least 3 characters long'),
+    .min(8, 'Password must be at least 8 characters long')
+    .required('Password is required'),
+  displayName: yup
+    .string()
+    .min(3, 'Full Name must be at least 3 characters long')
+    .required('Password is required'),
   confirmPassword: yup
     .string()
-    // .oneOf([yup.ref('password')], 'Passwords must match')
-    .min(8, 'Password must be at least 8 characters long')
-    .required('Confirm Password is required'),
+    .oneOf([yup.ref('password'), ''], 'Passwords must match')
+    .required('Password is required'),
 });

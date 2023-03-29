@@ -1,4 +1,4 @@
-const TOKENS_LS_NAME = 'tokens';
+const TOKENS_NAME = 'tokens';
 
 type Tokens = {
   accessToken: string;
@@ -7,7 +7,7 @@ type Tokens = {
 
 export const tokenService = {
   getToken: (): Tokens | null => {
-    const tokensStr = localStorage.getItem(TOKENS_LS_NAME);
+    const tokensStr = localStorage.getItem(TOKENS_NAME);
     return tokensStr ? JSON.parse(tokensStr) : null;
   },
   getRefreshToken: (): string | undefined => {
@@ -19,7 +19,7 @@ export const tokenService = {
     return tokens?.accessToken;
   },
   updateTokens: (tokens: Tokens): void => {
-    localStorage.setItem(TOKENS_LS_NAME, JSON.stringify(tokens));
+    localStorage.setItem(TOKENS_NAME, JSON.stringify(tokens));
   },
   updateAccessTokens: (accessToken: string): void => {
     const tokens = tokenService.getToken();
@@ -29,6 +29,6 @@ export const tokenService = {
     }
   },
   removeTokens: (): void => {
-    localStorage.removeItem(TOKENS_LS_NAME);
+    localStorage.removeItem(TOKENS_NAME);
   },
 };

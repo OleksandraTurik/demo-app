@@ -16,7 +16,6 @@ export const auth = {
 
   registration: async (userData: IUserData) => {
     const { data } = await API.post('/auth/register', userData);
-    // tokenService.updateTokens(data);
     return data;
   },
 
@@ -25,7 +24,7 @@ export const auth = {
     localStorage.removeItem('tokens');
   },
 
-  refreshToken: async (refreshToken: any) => {
+  refreshToken: async (refreshToken: string | undefined) => {
     const { data } = await API.post('/auth/refresh', refreshToken);
     tokenService.updateTokens(data);
     return data;

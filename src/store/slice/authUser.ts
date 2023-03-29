@@ -13,6 +13,7 @@ const initialState = {
   loading: false,
   error: false,
   registrationSuccess: false,
+  loginSuccess: false,
 };
 
 const modulePrefix = 'user';
@@ -31,7 +32,7 @@ export const logout = createAsyncThunk(`${modulePrefix}/logout`, async () => {
 
 export const registration = createAsyncThunk(
   `${modulePrefix}/registration`,
-  async (userData: any) => {
+  async (userData: IUserData) => {
     const res = await auth.registration({
       username: userData.username,
       password: userData.password,
@@ -50,14 +51,17 @@ const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.userDto;
         state.loading = false;
+        state.loginSuccess = true;
       })
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = false;
+        state.loginSuccess = false;
       })
       .addCase(login.rejected, (state, action) => {
-        state.error = action.error;
+        state.error = true; //TODO
         state.loading = false;
+        state.loginSuccess = false;
       })
       .addCase(registration.fulfilled, (state) => {
         state.loading = false;

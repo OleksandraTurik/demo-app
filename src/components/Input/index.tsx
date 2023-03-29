@@ -11,9 +11,11 @@ interface IInputProps {
   label: string;
   helperText?: string;
   error?: TError;
-  inputProps?: any;
+  InputProps?: any;
   size: TSize;
   field: any;
+  type?: string;
+  name?: string;
 }
 
 const Input = ({ field, label, helperText, ...rest }: IInputProps) => (

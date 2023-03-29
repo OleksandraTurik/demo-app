@@ -7,11 +7,12 @@ interface ICustomButton {
   variant: TVariant;
   text: string;
   type: TButtonType;
+  handleClick?: () => void;
 }
 
-const Button = ({ variant, text, type }: ICustomButton) => {
+const Button = ({ variant, text, type, handleClick }: ICustomButton) => {
   return (
-    <CustomButton variant={variant} type={type}>
+    <CustomButton variant={variant} type={type} onClick={handleClick}>
       {text}
     </CustomButton>
   );

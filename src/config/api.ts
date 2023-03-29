@@ -14,24 +14,32 @@ const API = axios.create({
 });
 
 const onRequestSuccess = async (config: InternalAxiosRequestConfig) => {
-  const tokens = tokenService.getToken();
-  //   const currentDate = new Date();
-  //   if (tokens?.accessToken) {
-  //     const [header, payload, signature] = tokens.accessToken.split('.');
-  //     const decodedPayload = JSON.parse(atob(payload));
-  // if (decodedPayload.exp * 1000 < currentDate.getTime()) {
-  //   await auth.refreshToken({ refreshToken: tokens.refreshToken });
-  //   if (config.headers) {
-  //     config.headers.Authorization = `Bearer ${tokenService.getAccessToken()}`;
-  //   }
-  // }
-  if (config.headers) {
-    config.headers.Authorization = `Bearer ${tokenService.getAccessToken()}`;
-  }
-  //   }
+  config.headers.Authorization = `Bearer ${tokenService.getAccessToken()}`;
   return config;
 };
 
+const onResponseSuccess = (res: any) => {
+  return res;
+};
+
+const onResponseFailed = async (err: any) => {
+  const originalConfig = err.config;
+  if (err.response) {
+    if (err.response.status === 401 && !originalConfig._retry) {
+      originalConfig._retry = true;
+      try {
+        const tokens = tokenService.getToken();
+        await auth.refreshToken({ refreshToken: tokens?.refreshToken });
+        return API(originalConfig);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+    return Promise.reject(err);
+  }
+};
+
 API.interceptors.request.use(onRequestSuccess);
+API.interceptors.response.use(onResponseSuccess, onResponseFailed);
 
 export default API;
