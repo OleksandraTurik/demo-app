@@ -18,9 +18,7 @@ const initialState = {
   loginSuccess: false,
 };
 
-const modulePrefix = 'user';
-
-export const login = createAsyncThunk(`/auth/login`, async (userData: IUserData) => {
+export const login = createAsyncThunk(`auth/login`, async (userData: IUserData) => {
   const res = await auth.login({
     username: userData.username,
     password: userData.password,
@@ -28,21 +26,18 @@ export const login = createAsyncThunk(`/auth/login`, async (userData: IUserData)
   return res;
 });
 
-export const logout = createAsyncThunk(`${modulePrefix}/logout`, async () => {
+export const logout = createAsyncThunk(`auth/logout`, async () => {
   await auth.logout();
 });
 
-export const registration = createAsyncThunk(
-  `${modulePrefix}/registration`,
-  async (userData: IUserData) => {
-    const res = await auth.registration({
-      username: userData.username,
-      password: userData.password,
-      displayName: userData.displayName,
-    });
-    return res;
-  },
-);
+export const registration = createAsyncThunk(`auth/registration`, async (userData: IUserData) => {
+  const res = await auth.registration({
+    username: userData.username,
+    password: userData.password,
+    displayName: userData.displayName,
+  });
+  return res;
+});
 
 const userSlice = createSlice({
   name: 'user',
