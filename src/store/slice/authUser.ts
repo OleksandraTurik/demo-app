@@ -60,8 +60,8 @@ const userSlice = createSlice({
         state.error = false;
         state.loginSuccess = false;
       })
-      .addCase(login.rejected, (state, action) => {
-        state.error = true; //TODO
+      .addCase(login.rejected, (state) => {
+        state.error = true;
         state.loading = false;
         state.loginSuccess = false;
       })
