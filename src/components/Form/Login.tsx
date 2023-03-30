@@ -25,7 +25,7 @@ import Show from '../../assets/show.png';
 import Hide from '../../assets/hidden.png';
 
 // Styles
-import { Form, FormWrapper, HiddenBtn, Icon, P, Title } from './styled';
+import { Form, FormWrapper, HiddenBtn, Icon, TextBlock, Title } from './styled';
 
 interface IFormInputs {
   displayName?: string;
@@ -44,19 +44,16 @@ const Login = () => {
   });
 
   const [isShowPassword, setIsShowPassword] = useState({ current: false, confirm: false });
-  const [isShowComponent, setIsShowComponent] = useState(false);
+  const [isShowRegistration, setIsShowRegistration] = useState(false);
 
-  const { loginSuccess, error, loading } = useSelector((state: RootState) => state.userReducer);
+  const { error, loading } = useSelector((state: RootState) => state.userReducer);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
   const navigate = useNavigate();
 
-  if (loading) return <Loader />;
-
   const onSubmit = (data: IFormInputs) => {
-    dispatch(login(data));
-    if (loginSuccess) {
+    dispatch(login(data)).then(() => {
       navigate('/home');
-    }
+    });
   };
 
   const handleClickShowPassword = (e: React.MouseEvent<HTMLButtonElement>, value: boolean) => {
@@ -64,19 +61,21 @@ const Login = () => {
     setIsShowPassword({ ...isShowPassword, [e.currentTarget.name]: value });
   };
 
-  const handleShowComponent = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleShowRegistration = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setIsShowComponent((prevState) => !prevState);
+    setIsShowRegistration((prevState) => !prevState);
   };
 
+  if (loading) return <Loader />;
+
   return (
-    <div>
-      {isShowComponent ? (
+    <>
+      {isShowRegistration ? (
         <Registration />
       ) : (
         <Form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
           <img src={Logotype} alt='logo' />
-          <Title fontSize='56px'>Sign In</Title>
+          <Title fontSize='56px'>SIGN IN</Title>
           <FormWrapper>
             <Controller
               name='username'
@@ -130,17 +129,17 @@ const Login = () => {
               )}
             />
             <Button type='submit' variant='contained' text='Sign In' />
-            <P>
+            <TextBlock>
               Don’t have account yet?
-              <HiddenBtn onClick={handleShowComponent} type='button'>
+              <HiddenBtn onClick={handleShowRegistration} type='button'>
                 New Account
               </HiddenBtn>
-            </P>
+            </TextBlock>
             {error ? <Notice message={errorMessage.login} /> : null}
           </FormWrapper>
         </Form>
       )}
-    </div>
+    </>
   );
 };
 

@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Description = styled.p`
-  color: white;
+  color: #fff;
   width: 466px;
   text-align: center;
 `;

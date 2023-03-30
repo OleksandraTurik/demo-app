@@ -1,7 +1,6 @@
 // Styles
 import { CustomInput } from './styled';
 
-type TError = boolean;
 type TVariant = 'outlined' | 'filled' | 'standard';
 type TSize = 'small' | 'medium';
 
@@ -10,7 +9,7 @@ interface IInputProps {
   variant: TVariant;
   label: string;
   helperText?: string;
-  error?: TError;
+  error?: boolean;
   InputProps?: any;
   size: TSize;
   field: any;

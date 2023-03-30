@@ -5,7 +5,7 @@ import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import auth from '@/services/authService';
 import { tokenService } from '@/services/tokenService';
 
-export const API_URL = 'https://expa.fly.dev';
+const API_URL = 'https://expa.fly.dev';
 
 const API = axios.create({
   baseURL: API_URL,
@@ -19,9 +19,7 @@ const onRequestSuccess = async (config: InternalAxiosRequestConfig) => {
   return config;
 };
 
-const onResponseSuccess = (res: AxiosResponse) => {
-  return res;
-};
+const onResponseSuccess = (res: AxiosResponse) => res;
 
 const onResponseFailed = async (err: any) => {
   const originalConfig = err.config;

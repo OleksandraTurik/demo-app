@@ -24,7 +24,7 @@ import Show from '../../assets/show.png';
 import Hide from '../../assets/hidden.png';
 
 // Styles
-import { Form, FormWrapper, HiddenBtn, Icon, P, Title } from './styled';
+import { Form, FormWrapper, HiddenBtn, Icon, TextBlock, Title } from './styled';
 
 interface IFormInputs {
   displayName: string;
@@ -43,24 +43,20 @@ const Registration = () => {
   });
 
   const [isShowPassword, setIsShowPassword] = useState({ current: false, confirm: false });
-  const [isShowComponent, setIsShowComponent] = useState(false);
+  const [isShowLogin, setIsShowLogin] = useState(false);
 
   const { registrationSuccess, error, loading } = useSelector(
     (state: RootState) => state.userReducer,
   );
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
-  if (loading) return <Loader />;
-
   const onSubmit = (data: IFormInputs) => {
     dispatch(registration(data));
   };
 
-  if (registrationSuccess) return <Login />;
-
-  const handleShowComponent = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleShowLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    return setIsShowComponent((prevState) => !prevState);
+    return setIsShowLogin((prevState) => !prevState);
   };
 
   const handleClickShowPassword = (e: React.MouseEvent<HTMLButtonElement>, value: boolean) => {
@@ -68,9 +64,12 @@ const Registration = () => {
     setIsShowPassword({ ...isShowPassword, [e.currentTarget.name]: value });
   };
 
+  if (loading) return <Loader />;
+  if (registrationSuccess) return <Login />;
+
   return (
-    <div>
-      {isShowComponent ? (
+    <>
+      {isShowLogin ? (
         <Login />
       ) : (
         <Form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
@@ -181,16 +180,16 @@ const Registration = () => {
             />
             <Button type='submit' variant='contained' text='Sign Up' />
             {error ? <Notice message={errorMessage.registration} /> : null}
-            <P>
+            <TextBlock>
               I have an account.
-              <HiddenBtn onClick={handleShowComponent} type='button'>
+              <HiddenBtn onClick={handleShowLogin} type='button'>
                 Go to Sign in
               </HiddenBtn>
-            </P>
+            </TextBlock>
           </FormWrapper>
         </Form>
       )}
-    </div>
+    </>
   );
 };
 

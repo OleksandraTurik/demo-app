@@ -4,21 +4,20 @@ import styled from 'styled-components';
 export const CustomInput = styled(TextField)`
   && {
     label {
-      color: white;
+      color: #fff;
       font-size: 14px;
     }
-    label.Mui-focused {
-      color: white;
-    }
+
+    label.Mui-focused,
     .MuiInputBase-root {
-      color: white;
+      color: #fff;
     }
-    .MuiInputBase-root {
-      border-bottom: 1px solid white;
-    }
+
+    .MuiInputBase-root,
     .MuiInput-underline:after {
       border-bottom: 1px solid white;
     }
+
     .MuiOutlinedInput-root {
       &.Mui-error fieldset {
         border-color: red;

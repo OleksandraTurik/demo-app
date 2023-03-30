@@ -15,9 +15,9 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: flex-start;
   max-width: 424px;
-  height: calc(100vh - 96px);
   margin: 0 auto;
   padding: 48px;
+  min-height: 100vh;
 `;
 
 export const FormWrapper = styled.div`
@@ -27,14 +27,14 @@ export const FormWrapper = styled.div`
   gap: 24px;
 `;
 
-export const Title = styled.h4<IStyled>`
+export const Title = styled.h1<IStyled>`
   font-size: ${({ fontSize }) => fontSize};
   color: #f1f2f1;
   margin-top: 72px;
   margin-bottom: 48px;
 `;
 
-export const P = styled.p`
+export const TextBlock = styled.p`
   color: #f1f2f1;
   font-size: 12px;
   text-align: center;

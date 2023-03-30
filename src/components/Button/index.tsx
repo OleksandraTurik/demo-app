@@ -11,12 +11,10 @@ interface ICustomButton {
   handleClick?: () => void;
 }
 
-const Button = ({ variant, text, type, handleClick }: ICustomButton) => {
-  return (
-    <CustomButton variant={variant} type={type} onClick={handleClick}>
-      {text}
-    </CustomButton>
-  );
-};
+const Button = ({ variant, text, type, handleClick }: ICustomButton) => (
+  <CustomButton variant={variant} type={type} onClick={handleClick}>
+    {text}
+  </CustomButton>
+);
 
 export default Button;
