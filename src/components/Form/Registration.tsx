@@ -119,7 +119,6 @@ const Registration = () => {
                   field={field}
                   id='password'
                   size='small'
-                  // name='password'
                   label='Password'
                   variant='standard'
                   error={!!errors.password}
