@@ -23,8 +23,7 @@ import Show from '../../assets/show.png';
 import Hide from '../../assets/hidden.png';
 
 // Styles
-import { Form, FormWrapper, HiddenBtn, P, Title } from '@/Pages/styled';
-import { Icon } from './styled';
+import { Form, FormWrapper, HiddenBtn, Icon, P, Title } from './styled';
 
 interface IFormInputs {
   displayName: string;
@@ -38,7 +37,6 @@ const Registration = () => {
     control,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<IFormInputs>({
     resolver: yupResolver(signUpSchema),
   });
@@ -49,14 +47,13 @@ const Registration = () => {
   const { registrationSuccess, error, loading } = useSelector((state: any) => state.userReducer);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
-  if (registrationSuccess) return <Login />;
   if (loading) return <Loader />;
 
   const onSubmit = (data: IFormInputs) => {
     dispatch(registration(data));
-    console.log(data);
-    reset();
   };
+
+  if (registrationSuccess) return <Login />;
 
   const handleShowComponent = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -64,7 +61,6 @@ const Registration = () => {
   };
 
   const handleClickShowPassword = (e: React.MouseEvent<HTMLButtonElement>, value: boolean) => {
-    console.log(isShowPassword);
     e.stopPropagation();
     setIsShowPassword({ ...isShowPassword, [e.currentTarget.name]: value });
   };
@@ -76,7 +72,7 @@ const Registration = () => {
       ) : (
         <Form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
           <img src={Logotype} alt='logo' />
-          <Title>SIGN UP</Title>
+          <Title fontSize='56px'>SIGN UP</Title>
           <FormWrapper>
             <Controller
               name='displayName'
@@ -169,7 +165,7 @@ const Registration = () => {
                             handleClickShowPassword(e, !isShowPassword.confirm)
                           }
                         >
-                          {isShowPassword.current ? (
+                          {isShowPassword.confirm ? (
                             <Icon src={Show} alt='hide' />
                           ) : (
                             <Icon src={Hide} alt='show' />

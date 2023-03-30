@@ -1,10 +1,17 @@
+// Config
 import API from '@/config/api';
+
+// Services
 import { tokenService } from './tokenService';
 
 interface IUserData {
   username: string;
   password: string;
   displayName?: string;
+}
+
+interface IRefreshToken {
+  refreshToken: string | undefined;
 }
 
 export const auth = {
@@ -24,7 +31,7 @@ export const auth = {
     localStorage.removeItem('tokens');
   },
 
-  refreshToken: async (refreshToken: string | undefined) => {
+  refreshToken: async (refreshToken: IRefreshToken) => {
     const { data } = await API.post('/auth/refresh', refreshToken);
     tokenService.updateTokens(data);
     return data;

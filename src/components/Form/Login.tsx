@@ -24,8 +24,7 @@ import Show from '../../assets/show.png';
 import Hide from '../../assets/hidden.png';
 
 // Styles
-import { Icon } from './styled';
-import { Form, FormWrapper, HiddenBtn, Logo, P, Title } from '@/Pages/styled';
+import { Form, FormWrapper, HiddenBtn, Icon, P, Title } from './styled';
 
 interface IFormInputs {
   displayName?: string;
@@ -75,8 +74,8 @@ const Login = () => {
         <Registration />
       ) : (
         <Form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-          <Logo src={Logotype} alt='logo' />
-          <Title>Sign In</Title>
+          <img src={Logotype} alt='logo' />
+          <Title fontSize='56px'>Sign In</Title>
           <FormWrapper>
             <Controller
               name='username'

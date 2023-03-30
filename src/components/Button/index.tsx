@@ -1,3 +1,4 @@
+// Styles
 import { CustomButton } from './styled';
 
 type TVariant = 'contained' | 'outlined' | 'text';

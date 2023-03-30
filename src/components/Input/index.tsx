@@ -1,6 +1,6 @@
+// Styles
 import { CustomInput } from './styled';
 
-// Types
 type TError = boolean;
 type TVariant = 'outlined' | 'filled' | 'standard';
 type TSize = 'small' | 'medium';

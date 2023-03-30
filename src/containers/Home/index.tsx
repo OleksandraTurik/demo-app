@@ -1,12 +1,22 @@
-import { Button, Loader } from '@/components';
-import Logotype from '../../assets/logo.png';
-import Image from '../../assets/vector.png';
-import Decor from '../../assets/decor.png';
-import { Container, Description, Firework, InfoWrapper, Logo, Title, Wrapper } from '../styled';
+// Absolute imports
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+// Store
 import { logout } from '@/store/slice/authUser';
+
+// Components
+import { Button, Loader } from '@/components';
+import { Title } from '@/components/Form/styled';
+
+// Assets
+import Logotype from '../../assets/logo.png';
+import Image from '../../assets/vector.png';
+import Decor from '../../assets/decor.png';
+
+//Styles
+import { Container, Description, Firework, InfoWrapper, Logo, Wrapper } from '../styled';
 
 const Home = () => {
   const { loading } = useSelector((state: any) => state.userReducer);
@@ -24,7 +34,7 @@ const Home = () => {
       <Logo src={Logotype} alt='logo' />
       <InfoWrapper>
         <Wrapper>
-          <Title>Congratulations</Title>
+          <Title fontSize='48px'>Congratulations</Title>
           <Firework src={Decor} alt='Fireworks' />
         </Wrapper>
         <Description>

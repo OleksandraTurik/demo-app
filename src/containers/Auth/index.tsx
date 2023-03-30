@@ -1,3 +1,4 @@
+// Components
 import { Registration } from '@/components';
 
 const Auth = () => {

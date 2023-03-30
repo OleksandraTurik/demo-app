@@ -1,6 +1,8 @@
-import auth from '@/services/authService';
-
+// Absolute imports
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
+// Services
+import auth from '@/services/authService';
 
 interface IUserData {
   username: string;
