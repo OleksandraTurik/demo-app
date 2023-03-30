@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Store
 import { logout } from '@/store/slice/authUser';
+import { RootState } from '@/store';
 
 // Components
 import { Button, Loader } from '@/components';
@@ -19,7 +20,7 @@ import Decor from '../../assets/decor.png';
 import { Container, Description, Firework, InfoWrapper, Logo, Wrapper } from '../styled';
 
 const Home = () => {
-  const { loading } = useSelector((state: any) => state.userReducer);
+  const { loading } = useSelector((state: RootState) => state.userReducer);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
   const navigate = useNavigate();
   if (loading) return <Loader />;

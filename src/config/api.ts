@@ -1,5 +1,5 @@
 // Absolute imports
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 // Services
 import auth from '@/services/authService';
@@ -19,7 +19,7 @@ const onRequestSuccess = async (config: InternalAxiosRequestConfig) => {
   return config;
 };
 
-const onResponseSuccess = (res: any) => {
+const onResponseSuccess = (res: AxiosResponse) => {
   return res;
 };
 

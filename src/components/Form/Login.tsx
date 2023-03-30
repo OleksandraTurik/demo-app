@@ -8,6 +8,7 @@ import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 
 // Store
 import { login } from '@/store/slice/authUser';
+import { RootState } from '@/store';
 
 // Components
 import { Button, Input, Loader, Notice, Registration } from '@/components';
@@ -45,7 +46,7 @@ const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState({ current: false, confirm: false });
   const [isShowComponent, setIsShowComponent] = useState(false);
 
-  const { loginSuccess, error, loading } = useSelector((state: any) => state.userReducer);
+  const { loginSuccess, error, loading } = useSelector((state: RootState) => state.userReducer);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
   const navigate = useNavigate();
 

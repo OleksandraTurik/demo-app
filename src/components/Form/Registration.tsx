@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 // Store
 import { registration } from '@/store/slice/authUser';
+import { RootState } from '@/store';
 
 // Components
 import { Button, Input, Loader, Login, Notice } from '@/components';
@@ -44,7 +45,9 @@ const Registration = () => {
   const [isShowPassword, setIsShowPassword] = useState({ current: false, confirm: false });
   const [isShowComponent, setIsShowComponent] = useState(false);
 
-  const { registrationSuccess, error, loading } = useSelector((state: any) => state.userReducer);
+  const { registrationSuccess, error, loading } = useSelector(
+    (state: RootState) => state.userReducer,
+  );
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
   if (loading) return <Loader />;
